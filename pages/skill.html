@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Felix - Keterampilan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .link-transition {
+      transition: color 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-black font-sans">
+
+  <header class="bg-white shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-10 border-b border-gray-200">
+    <h1 class="text-2xl font-bold text-primary">Felix - Portfolio</h1>
+    <nav class="space-x-4 hidden md:block">
+      <a href="../index.html" class="text-body-color hover:text-blue-dark link-transition">Home</a>
+      <a href="skill.html" class="text-body-color hover:text-blue-dark link-transition">Keterampilan</a>
+      <a href="achivement.html" class="text-body-color hover:text-blue-dark link-transition">Prestasi</a>
+      <a href="education.html" class="text-body-color hover:text-blue-dark link-transition">Pendidikan</a>
+      <a href="experience.html" class="text-body-color hover:text-blue-dark link-transition">Pengalaman</a>
+    </nav>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-6 space-y-8 mt-16">
+    <section id="skills" class="bg-white shadow p-8 rounded-xl scroll-mt-20 border border-gray-200">
+      <h2 class="text-2xl font-semibold mb-6 text-dark">Keterampilan</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-body-color">
+        <ul class="list-disc pl-6 space-y-2">
+          <li class="text-lg">Web Developer</li>
+          <li class="text-lg">Photography</li>
+          <li class="text-lg">Internet of Things</li>
+        </ul>
+        <ul class="list-disc pl-6 space-y-2">
+          <li class="text-lg">Design</li>
+          <li class="text-lg">Video Editor</li>
+          <li class="text-lg">Microsoft Excel</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-white shadow-md mt-8 p-4 text-right text-sm text-gray-500 border-t border-gray-200">
+    Created by Felix
+  </footer>
+
+  <script src="../JS/script.js"></script>
+</body>
+</html>

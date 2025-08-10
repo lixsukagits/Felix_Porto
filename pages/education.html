@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Felix - Pendidikan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .link-transition {
+      transition: color 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-black font-sans">
+
+  <header class="bg-white shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-10 border-b border-gray-200">
+    <h1 class="text-2xl font-bold text-primary">Felix - Portfolio</h1>
+    <nav class="space-x-4 hidden md:block">
+      <a href="index.html" class="text-body-color hover:text-blue-dark link-transition">Home</a>
+      <a href="skill.html" class="text-body-color hover:text-blue-dark link-transition">Keterampilan</a>
+      <a href="achivement.html" class="text-body-color hover:text-blue-dark link-transition">Prestasi</a>
+      <a href="education.html" class="text-body-color hover:text-blue-dark link-transition">Pendidikan</a>
+      <a href="experience.html" class="text-body-color hover:text-blue-dark link-transition">Pengalaman</a>
+    </nav>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-6 space-y-8 mt-16">
+    <section id="education" class="bg-white shadow p-8 rounded-xl scroll-mt-20 border border-gray-200">
+      <h2 class="text-2xl font-semibold mb-6 text-dark">Pendidikan</h2>
+      <ul class="list-disc pl-6 space-y-4 text-body-color">
+        <li>
+          <strong class="text-lg text-dark">SMK Telkom 2 Medan</strong><br>
+          Jurusan Teknik Komputer dan Jaringan<br>
+          Juli 2024 - Sekarang
+        </li>
+        <li>
+          <strong class="text-lg text-dark">Global Prima National Plus School</strong><br>
+          Lulusan TK, SD, SMP<br>
+          Juli 2012 - Juni 2024
+        </li>
+      </ul>
+    </section>
+
+    <div id="image-modal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 flex items-center justify-center p-4">
+      <div class="relative max-w-5xl max-h-full">
+        <img id="modal-image" src="" alt="Enlarged Image" class="max-w-full max-h-full rounded-lg shadow-xl">
+        <button id="close-modal" class="absolute top-4 right-4 text-white text-3xl font-bold">&times;</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-white shadow-md mt-8 p-4 text-right text-sm text-gray-500 border-t border-gray-200">
+    Created by Felix for Revou
+  </footer>
+
+  <script src="./JS/script.js"></script>
+</body>
+</html>
