@@ -43,6 +43,37 @@
     .nav-link-hover:hover::after {
       width: 100%;
     }
+
+    /* Mobile Menu Styling */
+    #mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 40; /* Di bawah navbar fixed */
+      display: none; /* Hidden by default */
+    }
+
+    #mobile-menu-content {
+      position: fixed;
+      top: 0;
+      right: -300px; /* Hidden off-screen */
+      width: 300px; /* Lebar menu */
+      height: 100%;
+      background-color: white;
+      z-index: 50; /* Di atas overlay dan sama dengan navbar */
+      box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+      transition: right 0.3s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    #mobile-menu-content.open {
+      right: 0; /* Slide in */
+    }
   </style>
 </head>
 <body class="bg-gray-100 text-black font-sans">
@@ -52,35 +83,52 @@
       <h1 class="text-2xl font-bold text-primary">Felix - Portfolio</h1>
     </div>
     <nav class="space-x-8 hidden md:block">
-      <a href="index.html" class="text-body-color hover:text-black font-semibold link-transition nav-link-hover">Beranda</a>
+      <a href="index.html" class="text-black font-bold link-transition nav-link-hover">Beranda</a>
       <a href="./pages/skill.html" class="text-body-color hover:text-black font-semibold link-transition nav-link-hover">Keterampilan</a>
       <a href="./pages/achivement.html" class="text-body-color hover:text-black font-semibold link-transition nav-link-hover">Prestasi</a>
       <a href="./pages/education.html" class="text-body-color hover:text-black font-semibold link-transition nav-link-hover">Pendidikan</a>
       <a href="./pages/experience.html" class="text-body-color hover:text-black font-semibold link-transition nav-link-hover">Pengalaman</a>
     </nav>
-    <button class="md:hidden text-gray-700 hover:text-primary">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <button id="menu-toggle" class="md:hidden text-gray-700 hover:text-primary z-50">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
       </svg>
     </button>
   </header>
 
-  <main class="max-w-7xl mx-auto p-6 md:p-12 space-y-16 pt-20"> <section id="hero" class="flex flex-col md:flex-row items-center justify-between gap-12 pt-12 pb-12 relative overflow-hidden">
+  <div id="mobile-menu-overlay"></div>
+  <div id="mobile-menu-content" class="md:hidden">
+    <button id="close-mobile-menu" class="self-end text-gray-700 hover:text-primary mb-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <nav class="flex flex-col space-y-4">
+      <a href="index.html" class="text-black font-bold text-lg py-2">Beranda</a>
+      <a href="./pages/skill.html" class="text-body-color hover:text-black font-semibold text-lg py-2">Keterampilan</a>
+      <a href="./pages/achivement.html" class="text-body-color hover:text-black font-semibold text-lg py-2">Prestasi</a>
+      <a href="./pages/education.html" class="text-body-color hover:text-black font-semibold text-lg py-2">Pendidikan</a>
+      <a href="./pages/experience.html" class="text-body-color hover:text-black font-semibold text-lg py-2">Pengalaman</a>
+    </nav>
+  </div>
+
+  <main class="max-w-7xl mx-auto p-6 md:p-12 space-y-16 pt-20">
+    <section id="hero" class="flex flex-col md:flex-row items-center justify-between gap-12 pt-12 pb-12 relative overflow-hidden">
       <div class="md:w-1/2 text-center md:text-left z-20">
-        <p class="text-lg text-primary mb-2 font-semibold">Hello, I'm</p>
-        <h1 id="greeting" class="text-5xl md:text-7xl font-bold text-dark mb-4 leading-tight">
-          <span id="welcome-user" class="text-black-custom">Felix Raymond</span>
+        <p class="text-lg text-primary mb-2 font-semibold">Hi <span id="welcome-user" class="text-black-custom"></span>, I'm</p>
+        <h1 class="text-5xl md:text-7xl font-bold text-dark mb-4 leading-tight">
+          <span class="text-black-custom">Felix Raymond</span>
         </h1>
-        <p class="text-xl text-gray-500 mb-8">UI & UX Designer</p>
+        <p class="text-xl text-gray-500 mb-8">Halaman Beranda</p>
         <div class="flex space-x-4 mb-8 justify-center md:justify-start">
-          <a href="#" class="text-gray-500 hover:text-blue-dark"><img src="https://via.placeholder.com/24" alt="Behance" class="w-6 h-6"></a>
-          <a href="#" class="text-gray-500 hover:text-blue-dark"><img src="https://via.placeholder.com/24" alt="Dribbble" class="w-6 h-6"></a>
-          <a href="#" class="text-gray-500 hover:text-blue-dark"><img src="https://via.placeholder.com/24" alt="LinkedIn" class="w-6 h-6"></a>
-          <a href="#" class="text-gray-500 hover:text-blue-dark"><img src="https://via.placeholder.com/24" alt="Instagram" class="w-6 h-6"></a>
+          <a href="https://www.instagram.com/lixforschl?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="text-gray-500 hover:text-blue-dark"><img src="https://www.svgrepo.com/show/506668/instagram.svg" alt="ig" class="w-6 h-6"></a>
+          <a href="https://wa.me/6281262729243" class="text-gray-500 hover:text-blue-dark"><img src="https://www.svgrepo.com/show/38250/whatsapp.svg" alt="wa" class="w-6 h-6"></a>
+          <a href="#" class="text-gray-500 hover:text-blue-dark"><img src="https://www.svgrepo.com/show/360538/linkedin-circle.svg" alt="LinkedIn" class="w-6 h-6"></a>
+          <a href="#" class="text-gray-500 hover:text-blue-dark"><img src="https://www.svgrepo.com/show/447165/github-outline.svg" alt="Github" class="w-6 h-6"></a>
         </div>
         <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-          <a href="#" class="bg-black-custom text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors text-center">HIRE ME</a>
-          <a href="#" class="border-2 border-gray-300 text-body-color px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors text-center">SEE MY RESUME</a>
+          <a href="https://wa.me/6281262729243" class="bg-black-custom text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors text-center">Hubungi Saya</a>
+          <a href="#about" class="border-2 border-gray-300 text-body-color px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors text-center">Lihat Portofolio</a>
         </div>
       </div>
       <div class="md:w-1/2 flex justify-center md:justify-end relative z-10">
@@ -100,8 +148,8 @@
           <p class="text-lg leading-relaxed mb-4">...di SMK Telkom 2 Medan yang sedang berambisi mendapatkan beasiswa Universitas di China melalui pelatihan dan organisasi untuk meningkatkan skill saya.</p>
           <p class="text-lg leading-relaxed mb-4">Saya sangat tertarik dengan semua hal terkait IT (IT Enthusiast). Saya mudah beradaptasi di lingkungan baru dan memiliki tingkat ingin tahu yang tinggi. Saya terus belajar dan mengembangkan diri untuk mencapai target karir saya di bidang IT.</p>
           <div class="flex flex-col sm:flex-row gap-4 mt-6">
-            <a href="#" class="bg-black-custom text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors text-center">HIRE ME</a>
-            <a href="#" class="border-2 border-gray-300 text-body-color px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors text-center">SEE MY RESUME</a>
+            <a href="https://wa.me/6281262729243" class="bg-black-custom text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors text-center">Hubungi Saya</a>
+            <a href="./pages/skill.html" class="border-2 border-gray-300 text-body-color px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors text-center">Lihat Keterampilan</a>
           </div>
         </div>
       </div>
@@ -109,7 +157,7 @@
   </main>
 
   <footer class="bg-white shadow-md mt-8 p-4 text-right text-sm text-gray-500 border-t border-gray-200">
-    Created by Felix
+    Created by Felix for Revou
   </footer>
 
   <script src="./JS/script.js"></script>

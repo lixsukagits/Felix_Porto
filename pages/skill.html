@@ -6,44 +6,206 @@
   <title>Felix - Keterampilan</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    /* Custom styles and adjustments */
     .link-transition {
       transition: color 0.3s ease;
+    }
+    .text-body-color {
+      color: #637381;
+    }
+    .text-blue-dark {
+      color: #1B44C8;
+    }
+    .text-primary {
+      color: #3758F9;
+    }
+    .bg-blue-dark {
+      background-color: #1B44C8;
+    }
+    .bg-black-custom {
+      background-color: #212b36;
+    }
+    /* Custom hover effect for navigation links */
+    .nav-link-hover {
+      position: relative;
+    }
+    .nav-link-hover::after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #212b36;
+      transition: width .3s ease;
+    }
+    .nav-link-hover:hover::after {
+      width: 100%;
+    }
+
+    /* Mobile Menu Styling */
+    #mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 40; /* Di bawah navbar fixed */
+      display: none; /* Hidden by default */
+      transition: opacity 0.3s ease-in-out;
+      opacity: 0;
+    }
+    #mobile-menu-overlay.visible {
+      opacity: 1;
+    }
+    #mobile-menu-content {
+      position: fixed;
+      top: 0;
+      right: -300px; /* Hidden off-screen */
+      width: 300px; /* Lebar menu */
+      height: 100%;
+      background-color: white;
+      z-index: 50; /* Di atas overlay dan sama dengan navbar */
+      box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+      transition: right 0.3s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    #mobile-menu-content.open {
+      right: 0; /* Slide in */
     }
   </style>
 </head>
 <body class="bg-gray-100 text-black font-sans">
 
-  <header class="bg-white shadow-md py-4 px-6 flex justify-between items-center sticky top-0 z-10 border-b border-gray-200">
-    <h1 class="text-2xl font-bold text-primary">Felix - Portfolio</h1>
-    <nav class="space-x-4 hidden md:block">
-      <a href="../index.html" class="text-body-color hover:text-blue-dark link-transition">Home</a>
-      <a href="skill.html" class="text-body-color hover:text-blue-dark link-transition">Keterampilan</a>
-      <a href="achivement.html" class="text-body-color hover:text-blue-dark link-transition">Prestasi</a>
-      <a href="education.html" class="text-body-color hover:text-blue-dark link-transition">Pendidikan</a>
-      <a href="experience.html" class="text-body-color hover:text-blue-dark link-transition">Pengalaman</a>
+  <header class="bg-white py-4 px-6 md:px-12 flex justify-between items-center fixed top-0 left-0 w-full z-50 shadow-md">
+    <div class="flex items-center space-x-4">
+      <h1 class="text-2xl font-bold text-primary">Felix - Portfolio</h1>
+    </div>
+    <nav class="space-x-8 hidden md:block">
+      <a href="../index.html" class="text-body-color hover:text-black font-semibold link-transition nav-link-hover">Beranda</a>
+      <a href="skill.html" class="text-black font-semibold link-transition nav-link-hover">Keterampilan</a>
+      <a href="achivement.html" class="text-body-color hover:text-black font-semibold link-transition nav-link-hover">Prestasi</a>
+      <a href="education.html" class="text-body-color hover:text-black font-semibold link-transition nav-link-hover">Pendidikan</a>
+      <a href="experience.html" class="text-body-color hover:text-black font-semibold link-transition nav-link-hover">Pengalaman</a>
     </nav>
+    <button id="menu-toggle" class="md:hidden text-gray-700 hover:text-primary z-50">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+      </svg>
+    </button>
   </header>
 
-  <main class="max-w-6xl mx-auto p-6 space-y-8 mt-16">
-    <section id="skills" class="bg-white shadow p-8 rounded-xl scroll-mt-20 border border-gray-200">
-      <h2 class="text-2xl font-semibold mb-6 text-dark">Keterampilan</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-body-color">
-        <ul class="list-disc pl-6 space-y-2">
-          <li class="text-lg">Web Developer</li>
-          <li class="text-lg">Photography</li>
-          <li class="text-lg">Internet of Things</li>
-        </ul>
-        <ul class="list-disc pl-6 space-y-2">
-          <li class="text-lg">Design</li>
-          <li class="text-lg">Video Editor</li>
-          <li class="text-lg">Microsoft Excel</li>
-        </ul>
+  <div id="mobile-menu-overlay" class="md:hidden"></div>
+  <div id="mobile-menu-content" class="md:hidden">
+    <button id="close-mobile-menu" class="self-end text-gray-700 hover:text-primary mb-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <nav class="flex flex-col space-y-4">
+      <a href="../index.html" class="text-body-color hover:text-black font-semibold text-lg py-2">Beranda</a>
+      <a href="skill.html" class="text-black font-semibold text-lg py-2">Keterampilan</a>
+      <a href="achivement.html" class="text-body-color hover:text-black font-semibold text-lg py-2">Prestasi</a>
+      <a href="education.html" class="text-body-color hover:text-black font-semibold text-lg py-2">Pendidikan</a>
+      <a href="experience.html" class="text-body-color hover:text-black font-semibold text-lg py-2">Pengalaman</a>
+    </nav>
+  </div>
+
+  <main class="max-w-7xl mx-auto p-6 md:p-12 space-y-16 pt-20">
+    <section id="hero" class="flex flex-col items-center justify-center gap-12 pt-12 pb-12 relative overflow-hidden">
+      <div class="w-full text-center z-20">
+        <p class="text-lg text-primary mb-2 font-semibold">Hi <span id="welcome-user"></span>, I'm</p>
+        <h1 class="text-5xl md:text-7xl font-bold text-black-custom mb-4 leading-tight">
+          <span>Felix Raymond</span>
+        </h1>
+        <p class="text-xl text-gray-500 mb-8">Halaman Keterampilan</p>
+        <div class="flex space-x-4 mb-8 justify-center">
+          <a href="https://www.instagram.com/lixforschl?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="text-gray-500 hover:text-blue-dark">
+            <img src="https://www.svgrepo.com/show/506668/instagram.svg" alt="ig" class="w-8 h-8">
+          </a>
+          <a href="https://wa.me/6281262729243" class="text-gray-500 hover:text-blue-dark">
+            <img src="https://www.svgrepo.com/show/38250/whatsapp.svg" alt="wa" class="w-8 h-8">
+          </a>
+          <a href="#" class="text-gray-500 hover:text-blue-dark">
+            <img src="https://www.svgrepo.com/show/360538/linkedin-circle.svg" alt="LinkedIn" class="w-8 h-8">
+          </a>
+          <a href="#" class="text-gray-500 hover:text-blue-dark">
+            <img src="https://www.svgrepo.com/show/447165/github-outline.svg" alt="Github" class="w-8 h-8">
+          </a>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="https://wa.me/6281262729243" class="bg-black-custom text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors text-center">Hubungi Saya</a>
+          <a href="#skills" class="border-2 border-gray-300 text-body-color px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors text-center">Lihat Keterampilan</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section with Responsive Grid -->
+    <section id="skills" class="bg-white shadow p-8 rounded-xl scroll-mt-20 border border-gray-200 text-center">
+      <h2 class="text-4xl font-bold text-black-custom mb-4">Keterampilan</h2>
+      <p class="text-xl text-gray-500 mb-8">WHAT I'M GOOD AT</p>
+      
+      <!-- Grid container for skills with consistent sizing -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Skill 1: Web Developer -->
+        <div class="flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <!-- Image container with a fixed aspect ratio for consistent height -->
+          <div class="relative w-full aspect-square mb-4">
+            <img src="https://asset.kompas.com/crops/xaWxxmvq-zWOefkfOiNgs_SfdUI=/0x0:800x533/1200x800/data/photo/2022/10/09/634237bd17f3f.jpg" alt="Web Developer Skill" class="absolute inset-0 w-full h-full object-cover rounded-md">
+          </div>
+          <h3 class="text-xl font-semibold text-black-custom">Web Developer</h3>
+        </div>
+
+        <!-- Skill 2: Photography -->
+        <div class="flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div class="relative w-full aspect-square mb-4">
+            <img src="https://www.adorama.com/alc/wp-content/uploads/2021/04/photography-camera-learning-feature.jpg" alt="Photography Skill" class="absolute inset-0 w-full h-full object-cover rounded-md">
+          </div>
+          <h3 class="text-xl font-semibold text-black-custom">Photography</h3>
+        </div>
+
+        <!-- Skill 3: Internet of Things -->
+        <div class="flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div class="relative w-full aspect-square mb-4">
+            <img src="https://thumbs.dreamstime.com/b/internet-things-iot-concept-businessman-click-symbol-connected-icons-typical-%C3%A2%E2%82%AC-intelligent-house-car-70990334.jpg" alt="Internet of Things Skill" class="absolute inset-0 w-full h-full object-cover rounded-md">
+          </div>
+          <h3 class="text-xl font-semibold text-black-custom">Internet of Things</h3>
+        </div>
+
+        <!-- Skill 4: Design -->
+        <div class="flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div class="relative w-full aspect-square mb-4">
+            <img src="https://static-cse.canva.com/blob/1522769/CC2024PR_Workplaceenterprisecentricfeatures.png" alt="Design Skill" class="absolute inset-0 w-full h-full object-cover rounded-md">
+          </div>
+          <h3 class="text-xl font-semibold text-black-custom">Design</h3>
+        </div>
+
+        <!-- Skill 5: Video Editor -->
+        <div class="flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div class="relative w-full aspect-square mb-4">
+            <img src="https://media.istockphoto.com/id/1356585971/photo/unrecognizable-guy-editing-astronaut-video.jpg?s=612x612&w=0&k=20&c=xeszOlvz5DAH2EObVOR1xSBHE2WlzVrh5SLitut99AY=" alt="Video Editor Skill" class="absolute inset-0 w-full h-full object-cover rounded-md">
+          </div>
+          <h3 class="text-xl font-semibold text-black-custom">Video Editor</h3>
+        </div>
+
+        <!-- Skill 6: Microsoft Excel -->
+        <div class="flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <div class="relative w-full aspect-square mb-4">
+            <img src="https://img.freepik.com/free-photo/closeup-hands-using-computer-laptop-with-screen-showing-analysis-data_53876-23014.jpg" alt="Microsoft Excel Skill" class="absolute inset-0 w-full h-full object-cover rounded-md">
+          </div>
+          <h3 class="text-xl font-semibold text-black-custom">Microsoft Excel</h3>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="bg-white shadow-md mt-8 p-4 text-right text-sm text-gray-500 border-t border-gray-200">
-    Created by Felix
+    Created by Felix for Revou
   </footer>
 
   <script src="../JS/script.js"></script>
