@@ -7,5 +7,6 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: '/felix-porto/',  // ← WAJIB diisi nama repo GitHub-mu
+  // Ganti 'felix-portfolio' dengan nama repo GitHub kamu
+  base: '/felix-portfolio/',
 })
