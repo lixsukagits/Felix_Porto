@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import WelcomeModal from '../components/WelcomeModal'
-import SocialLinks from '../components/SocialLinks'
-import { useUserName } from '../hooks/useUserName'
+import WelcomeModal from '../components/welcomemodal'
+import SocialLinks from '../components/sociallinks'
+import { useUserName } from '../hooks/useusername'
 
 export default function Home() {
   const { userName, showModal, handleModalClose } = useUserName()

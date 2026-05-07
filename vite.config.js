@@ -8,5 +8,5 @@ export default defineConfig({
     tailwindcss(),
   ],
   // Ganti 'felix-portfolio' dengan nama repo GitHub kamu
-  base: '/felix-portfolio/',
+  base: '/felix-porto/',
 })
